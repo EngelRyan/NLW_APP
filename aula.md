@@ -1,7 +1,9 @@
 ## Tipos de dados
 - Strings(Textos): "",'',``
 - Numbers : 1,2.4,10
+- Booleans: True,False
 - Function
+- Arrays 
 
 ## Variáveis
 - Let: Pode mudar
@@ -15,3 +17,7 @@
 ## Escopo
 - Global
 - Local {}
+
+## Objetos
+- Atributos e dados
+- Manipulação
