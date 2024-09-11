@@ -1,26 +1,27 @@
-//Array,Objeto and Function
-let metas = ["escovar","estudar"]
+function start(){
+    while(true){
+        let option = "cadastrar"
+        switch(option){
+            
+            case "cadastrar":
+                console.log("vamos cadastrar")
+                break
 
-console.log(metas[0] + " " + metas[1])
+            case "listar":
+                console.log("vamos listar")
+                break
 
-let meta = {
-    value: 'Estudar 1h por dia',
-    checked: false,
-    isChecked: () => {}
+                case "sair":
+                    console.log("vamos sair")
+                    return
+                    break
+
+                default:
+                    console.log("opção invalida")
+        }
+
+    }
 }
-console.log(meta.value)
-console.log(meta.checked)  
-console.log(meta.isChecked) 
-
-meta.checked  = true;
-
-console.log(meta.checked)
 
 
-// Arrow Function (PArece Lambda)
-const criarMeta = () => {}
-
-// Named Function
-function fazerMeta(){
-
-}
+start()
