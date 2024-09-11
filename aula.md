@@ -21,3 +21,11 @@
 ## Objetos
 - Atributos e dados
 - Manipulação
+
+## Estruturas
+
+### Repetição
+- While
+
+### Condicionais
+- Switch
