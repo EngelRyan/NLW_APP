@@ -1,0 +1,18 @@
+[
+  {
+    "value": "Estudar 1h por dia",
+    "checked": true
+  },
+  {
+    "value": "Ler 10 página por dia",
+    "checked": false
+  },
+  {
+    "value": "Tomar 2L de água",
+    "checked": false
+  },
+  {
+    "value": "Andar 1km",
+    "checked": true
+  }
+]
