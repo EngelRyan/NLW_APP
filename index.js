@@ -74,6 +74,53 @@ async function listarMetas() {
     await saveMetas()
 }
 
+async function modificarMetas() {
+    if(metas.length == 0){
+        message = "Não existem metas! :("
+        return
+    }
+    const abertas = metas.filter((meta) => {
+        return !meta.checked 
+    })
+
+    if(abertas.length == 0){
+        message = "Não existem metas abertas para modificar! :)"
+        return
+    }
+    const response =  await checkbox({
+        message: "Selecione a meta que deseja modificar",
+        choices: [...abertas],
+        instructions: false
+    })
+
+    if(response.length == 0){
+        message = "Nenhuma meta selecionada!"
+        return
+    }
+    if(response.length > 1){
+        message = "Você deve selecionar apenas uma meta!"
+        return
+    }
+
+    const modify = await input({message: "Digite a modificação:"})
+
+    if(modify.length == 0){
+        message = "A modificação não pode ser vazia."
+        return
+    }
+
+    metas.forEach((meta) => {
+        console.log(meta.value)
+        console.log(response)
+        if(meta.value == response){
+            return meta.value = modify
+        }
+    })
+
+    message = "Meta modificada com sucesso!)"
+    await saveMetas()
+}
+
 async function metasRealizadas() {
     if(metas.length == 0){
         message = "Não existem metas! :("
@@ -84,7 +131,7 @@ async function metasRealizadas() {
     })
 
     if(realizadas.length == 0){
-        messsage = "Não existem metas realizadas! :("
+        message = "Não existem metas realizadas! :("
         return
     }
 
@@ -176,6 +223,10 @@ async function start(){
                     value: "listar"
                 },
                 {
+                    name: "Modificar metas",
+                    value: "modificar"
+                },
+                {
                     name: "Metas realizadas",
                     value: "realizadas"
                 },
@@ -203,6 +254,10 @@ async function start(){
 
             case "listar":
                 await listarMetas()
+                break
+
+            case "modificar":
+                await modificarMetas()
                 break
 
             case "realizadas":

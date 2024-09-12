@@ -1,10 +1,6 @@
 [
   {
     "value": "Estudar 1h por dia",
-    "checked": true
-  },
-  {
-    "value": "Ler 10 página por dia",
     "checked": false
   },
   {
@@ -12,7 +8,11 @@
     "checked": false
   },
   {
-    "value": "Andar 1km",
-    "checked": true
+    "value": "Correr 1km",
+    "checked": false
+  },
+  {
+    "value": "Ler 5 páginas",
+    "checked": false
   }
 ]
