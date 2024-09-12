@@ -1,11 +1,19 @@
 const { select, input, checkbox } = require('@inquirer/prompts')
 
-let meta = {
-    value: "Estudar 1h por dia",
-    checked: false
-}
-
-let metas = [ meta ]
+let metas = [ 
+    {
+        value: "Estudar 1h por dia",
+        checked: false
+    },
+    {
+        value: "Ler 10 página por dia",
+        checked: false
+    },
+    {
+        value: "Tomar 2L de água",
+        checked: false
+    }      
+]
 
 async function cadastrarMeta(){
     const meta = await input({message: "Digite a meta: "})
@@ -47,6 +55,22 @@ async function listarMetas() {
     console.log("Metas(s) marcada(s) concluída(s)")
 }
 
+async function metasRealizadas() {
+    const realizadas = metas.filter((meta) => {
+        return meta.checked
+    })
+
+    if(realizadas.length == 0){
+        console.log("Não existem metas realizadas! :(")
+        return
+    }
+
+    await select({
+        message: "Metas Realizadas",
+        choices: [...realizadas]
+    })
+}
+
 async function start(){
 
     while(true){
@@ -61,6 +85,10 @@ async function start(){
                 {
                     name: "Listar metas",
                     value: "listar"
+                },
+                {
+                    name: "Metas realizadas",
+                    value: "realizadas"
                 },
                 {
                     name: "Sair",
@@ -80,16 +108,15 @@ async function start(){
                 await listarMetas()
                 break
 
-                case "sair":
-                    console.log("vamos sair")
-                    return
+            case "realizadas":
+                await metasRealizadas()
+                break
 
-                default:
-                    console.log("opção invalida")
+            case "sair":
+                console.log("vamos sair")
+                return
         }
-
     }
 }
-
 
 start()
