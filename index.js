@@ -1,21 +1,22 @@
 const { select, input, checkbox } = require('@inquirer/prompts')
+const { json } = require('stream/consumers')
 
-let message = "Bem vindo ao app de Metas"
+const fs = require("fs").promises
 
-let metas = [ 
-    {
-        value: "Estudar 1h por dia",
-        checked: false
-    },
-    {
-        value: "Ler 10 página por dia",
-        checked: false
-    },
-    {
-        value: "Tomar 2L de água",
-        checked: false
-    }      
-]
+let metas
+
+async function loadMetas(){
+    try{
+        const data = await fs.readFile("metas.json","utf-8")
+        metas = JSON.parse(data)
+    }catch(erro){
+        metas = []
+    }
+}
+
+async function saveMetas() {
+    await fs.writeFile("metas.json",JSON.stringify(metas,null,2))
+}
 
 async function cadastrarMeta(){
     const meta = await input({message: "Digite a meta:"})
@@ -37,7 +38,7 @@ async function cadastrarMeta(){
     })
 
     message = "Meta cadastrada com sucesso! :)";
-
+    await saveMetas()
     
 }
 
@@ -66,6 +67,7 @@ async function listarMetas() {
     })
 
     message = "Metas(s) marcada(s) concluída(s)"
+    await saveMetas()
 }
 
 async function metasRealizadas() {
@@ -124,6 +126,7 @@ async function deletarMetas() {
         })
     })
     message ="Meta(s) deletada(s) com sucesso!!"
+    await saveMetas()
 }
 
 function mostrarMensagem(){
@@ -136,7 +139,11 @@ function mostrarMensagem(){
     }
 }
 
+let message = "Bem vindo ao app de Metas"
+
 async function start(){
+    await loadMetas()
+
 
     while(true){
         mostrarMensagem()
